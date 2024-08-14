@@ -16,7 +16,7 @@ This project is a Payment Gateway System integrated with PayPal, built to suppor
 
 ## Deployment
 
-- Click [here](https://payment-gateway-system-nodejs.onrender.com) to access the deployed e-commerce site.
+- Click [here](https://payment-gateway-system-nodejs.onrender.com) to access the deployed e-commerce site. Use Personal Account - sb-77dss31970759@personal.example.com , password - t'Q;b6<6 for purchasing.
 
 ## Contributing
 
