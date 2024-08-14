@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Gateway System</title>
+    <style>
+      /* Reset some default browser styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      header {
+        background-color: #282c34;
+        padding: 1rem;
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .success-message {
+        display: none;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border: 1px solid #28a745;
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: 8px;
+        text-align: center;
+        animation: fadeIn 1s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: space-around;
+        animation: fadeIn 1s ease-out;
+      }
+
+      .product {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 280px;
+        text-align: center;
+        padding: 1rem;
+        margin: 0 auto;
+      }
+
+      .product:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .product img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .product-title {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        color: #007bff;
+        transition: color 0.3s;
+      }
+
+      .product-title:hover {
+        color: #0056b3;
+      }
+      
+      .price {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: #28a745;
+      }
+
+      form {
+        text-align: center;
+      }
+
+      input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #282c34;
+        color: #fff;
+        margin-top: auto;
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Ankush App Store</h1>
+    </header>
+
+    <div class="container">
+      <div class="success-message" id="successMessage">Order done!</div>
+      <div class="products">
+        <div class="product">
+          <img
+            src="https://images-cdn.ubuy.co.in/6358f40d601dad54db360e22-boston-red-sox-new-era-fashion-color.jpg"
+            alt="Red Sox Hat"
+          />
+          <h2 class="product-title">Red Sox Hat</h2>
+          <p class="price">$25.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Red Sox Hat" />
+            <input type="hidden" name="price" value="25.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://5.imimg.com/data5/XJ/XS/MY-10595393/blank-t-shirts.jpg"
+            alt="Blue T-Shirt"
+          />
+          <h2 class="product-title">Blue T-Shirt</h2>
+          <p class="price">$30.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Blue T-Shirt" />
+            <input type="hidden" name="price" value="30.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://refoam.in/cdn/shop/products/IMG_0030-2.jpg?v=1645839069"
+            alt="Black Shoes"
+          />
+          <h2 class="product-title">Black Shoes</h2>
+          <p class="price">$50.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Black Shoes" />
+            <input type="hidden" name="price" value="50.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://images-cdn.ubuy.co.in/6462ccf8aefe9c18ae353793-cromoncent-boys-girls-child-denim-jacket.jpg"
+            alt="Classic Denim Jacket"
+          />
+          <h2 class="product-title">Classic Denim Jacket</h2>
+          <p class="price">$45.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Classic Denim Jacket" />
+            <input type="hidden" name="price" value="45.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://www.voganow.com/cdn/shop/products/VNCZ-335_11.jpg?v=1652786206"
+            alt="Black Leather Boots"
+          />
+          <h2 class="product-title">Black Leather Boots</h2>
+          <p class="price">$120.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Black Leather Boots<" />
+            <input type="hidden" name="price" value="120.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://frenchcrown.in/cdn/shop/files/779_5.jpg?v=1704862010&width=3500"
+            alt="White Cotton Shirt"
+          />
+          <h2 class="product-title">White Cotton Shirt</h2>
+          <p class="price">$20.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="White Cotton Shirt" />
+            <input type="hidden" name="price" value="20.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://5.imimg.com/data5/SELLER/Default/2023/10/352762717/OE/IX/MF/185456460/86.jpg"
+            alt="Floral Summer Dress"
+          />
+          <h2 class="product-title">Floral Summer Dress</h2>
+          <p class="price">$35.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Floral Summer Dress" />
+            <input type="hidden" name="price" value="35.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://5.imimg.com/data5/SELLER/Default/2022/12/VQ/JE/GG/180328703/mens-slim-fit-jeans-men-stretch-fashion-skinny-jeans-trousers-male-super-elastic-casual-straight-blue-34753.jpg"
+            alt="Casual Blue Jeans"
+          />
+          <h2 class="product-title">Casual Blue Jeans</h2>
+          <p class="price">$40.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Casual Blue Jeans" />
+            <input type="hidden" name="price" value="40.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://cdn-media.shop4shops.in/media/mf_webp/jpg/media/catalog/product/cache/33b60c74c7b0dbd97f1d9d76fe2041a4/m/9/m9928a2.webp"
+            alt="Striped Polo Shirt"
+          />
+          <h2 class="product-title">Striped Polo Shirt</h2>
+          <p class="price">$25.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Striped Polo Shirt" />
+            <input type="hidden" name="price" value="25.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://himalayankraft.in/wp-content/uploads/2018/10/HK-Stole-HB-4-2.jpg"
+            alt="Red Woolen Scarf"
+          />
+          <h2 class="product-title">Red Woolen Scarf</h2>
+          <p class="price">$15.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Red Woolen Scarf" />
+            <input type="hidden" name="price" value="15.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://d1fufvy4xao6k9.cloudfront.net/looks/817/Sumi%206.jpg"
+            alt="Beige Trench Coat"
+          />
+          <h2 class="product-title">Beige Trench Coat</h2>
+          <p class="price">$90.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Beige Trench Coat" />
+            <input type="hidden" name="price" value="90.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://assets.ajio.com/medias/sys_master/root/ajio/catalog/5ef37848aeb26931757f4b1e/-473Wx593H-410244960-005-MODEL.jpg"
+            alt="Grey Crewneck Sweater"
+          />
+          <h2 class="product-title">Grey Crewneck Sweater</h2>
+          <p class="price">$30.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Grey Crewneck Sweater" />
+            <input type="hidden" name="price" value="30.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://shop.relove.in/cdn/shop/products/4msd3600-01-3226.jpg?v=1696485905"
+            alt="Black Skinny Jeans"
+          />
+          <h2 class="product-title">Black Skinny Jeans</h2>
+          <p class="price">$50.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Black Skinny Jeans" />
+            <input type="hidden" name="price" value="50.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://5.imimg.com/data5/KP/DR/HQ/SELLER-29411758/mens-navy-blue-blazer.jpg"
+            alt="Navy Blue Blazer"
+          />
+          <h2 class="product-title">Navy Blue Blazer</h2>
+          <p class="price">$75.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="Navy Blue Blazer" />
+            <input type="hidden" name="price" value="75.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+        <div class="product">
+          <img
+            src="https://rukminim2.flixcart.com/image/850/1000/ksqeky80/shoe/0/o/y/8-line-shoes-fashion-white-original-imag687guzw86huz.jpeg?q=20&crop=false"
+            alt="White Sneakers"
+          />
+          <h2 class="product-title">White Sneakers</h2>
+          <p class="price">$60.00</p>
+          <form action="/pay" method="post">
+            <input type="hidden" name="item" value="White Sneakers" />
+            <input type="hidden" name="price" value="60.00" />
+            <input type="submit" value="Buy Now" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Ankush App Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("status") && urlParams.get("status") === "success") {
+          document.getElementById("successMessage").style.display = "block";
+        }
+      };
+    </script>
+  </body>
+</html>

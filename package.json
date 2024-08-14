@@ -1,0 +1,16 @@
+{
+  "name": "payment_gateway_system_nodejs_paypal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "paypal-rest-sdk": "^1.8.1"
+  }
+}
