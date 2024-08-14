@@ -29,8 +29,8 @@ app.post("/pay", (req, res) => {
       payment_method: "paypal",
     },
     redirect_urls: {
-      return_url: "https://payment-gateway-system-nodejs.onrender.com/success",
-      cancel_url: "https://payment-gateway-system-nodejs.onrender.com/cancel",
+      return_url: `https://payment-gateway-system-nodejs.onrender.com/success?price=${price}`,
+      cancel_url: `https://payment-gateway-system-nodejs.onrender.com/cancel`,
     },
     transactions: [
       {
